@@ -8,4 +8,19 @@
   background-color: #111;
   overflow-x: hidden;
   padding-top: 20px;
+
+  display: block;
+}
+
+.sidebtn {
+  text-decoration: none;
+  text-align: center;
+  font-size: 20px;
+  color: #818181;
+  display: block;
+  margin-left: 20px;
+}
+
+.sidebtn:hover {
+  color: #f1f1f1;
 }

@@ -3,7 +3,7 @@
 </div>
 <div class="container col-4 bg-info mx-auto my-3 border border-primary rounded">
   <div class="container text-center m-2">
-    <h3 class="account-title">Access Project Management Portal</h3>
+    <h3 class="account-title">Project Management Portal</h3>
 
     <button (click)="navigateToSignUp()" class="btn btn-success">
       Not a user? Sign up HERE!
@@ -33,7 +33,13 @@
     </div>
 
     <div class="form-group text-center m-2">
-      <button type="submit" class="btn btn-warning account-btn">Login</button>
+      <button
+        type="submit"
+        (click)="login()"
+        class="btn btn-warning account-btn"
+      >
+        Login
+      </button>
     </div>
   </form>
 </div>

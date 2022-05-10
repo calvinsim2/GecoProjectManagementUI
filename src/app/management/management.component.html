@@ -1,8 +1,19 @@
-<div class="bg-info sidenav">
-  <h3 class="w3-bar-item">Menu</h3>
-  <a href="#" class="w3-bar-item w3-button">Link 1</a>
-  <a href="#" class="w3-bar-item w3-button">Link 2</a>
-  <a href="#" class="w3-bar-item w3-button">Link 3</a>
+<div class="bg-info text-center sidenav">
+  <h3 class="text-center">Menu</h3>
+  <div class="text-center">
+    <button (click)="navigateToDashBoard()" class="btn sidebtn text-center">
+      DashBoard
+    </button>
+    <button (click)="navigateToProjects()" class="btn sidebtn text-center">
+      Projects
+    </button>
+    <button (click)="navigateToMyProjects()" class="btn sidebtn text-center">
+      My Projects
+    </button>
+    <button (click)="navigateToUsers()" class="btn sidebtn text-center">
+      Employees
+    </button>
+  </div>
 </div>
 <div style="margin-left: 25%">
   <router-outlet></router-outlet>
