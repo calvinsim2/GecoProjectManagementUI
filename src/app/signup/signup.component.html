@@ -1,1 +1,35 @@
-<p>signup works!</p>
+<div class="container text-center mx-auto mt-5">
+  <img src="assets/logo.jpg" width="150" alt="" />
+</div>
+<div
+  class="container col-4 bg-warning mx-auto my-3 border border-primary rounded"
+>
+  <div class="container text-center m-2">
+    <h3 class="account-title">Sign Up</h3>
+
+    <button (click)="navigateToLogIn()" class="btn btn-secondary">
+      Already a User? Log In Here!
+    </button>
+  </div>
+
+  <div class="container col-9 mx-auto my-3">
+    <div
+      class="d-flex flex-row justify-content-evenly align-items-center text-center"
+    >
+      <button
+        class="btn btn-success p-3 m-2 fw-bold"
+        data-bs-toggle="modal"
+        data-bs-target="#signUpModal"
+      >
+        Project Manager
+      </button>
+      <button
+        class="btn btn-info p-3 m-2 fw-bold"
+        data-bs-toggle="modal"
+        data-bs-target="#signUpModal"
+      >
+        Employee
+      </button>
+    </div>
+  </div>
+</div>
