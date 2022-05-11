@@ -14,7 +14,16 @@ import { IndUserComponent } from './ind-user/ind-user.component';
 import { RoleComponent } from './role/role.component';
 
 @NgModule({
-  declarations: [ManagementComponent, DashboardComponent, AllProjectsComponent, IndProjectComponent, MyProjectsComponent, AllUserComponent, IndUserComponent, RoleComponent],
+  declarations: [
+    ManagementComponent,
+    DashboardComponent,
+    AllProjectsComponent,
+    IndProjectComponent,
+    MyProjectsComponent,
+    AllUserComponent,
+    IndUserComponent,
+    RoleComponent,
+  ],
   imports: [CommonModule, ManagementRoutingModule, ReactiveFormsModule],
 })
 export class ManagementModule {}
