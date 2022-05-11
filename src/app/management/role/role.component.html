@@ -1,32 +1,39 @@
+<div class="content container-fluid">
+  <div class="page-header d-flex justify-content-between align-items-center">
+    <div class="page-title myheader text-center mt-2">
+      <p>Role/Designation</p>
+    </div>
+    <div class="add-blog mt-2">
+      <button
+        class="btn addbtn btn-success"
+        data-bs-toggle="modal"
+        data-bs-target="#blogModal"
+      >
+        <i class="fa fa-plus"></i> Add Role
+      </button>
+    </div>
+  </div>
+</div>
+
 <div class="container text-center">
   <table class="table table-striped table-hover">
     <thead>
       <tr>
-        <th scope="col">UserID</th>
-        <th scope="col">First Name</th>
-        <th scope="col">Last Name</th>
-        <th scope="col">Email</th>
-        <th scope="col"></th>
+        <th scope="col">RoleID</th>
+        <th scope="col">Role / Designation</th>
         <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
-      <tr class="each-row" *ngFor="let user of userList">
-        <td>{{ user.userID }}</td>
-        <td>{{ user.firstName }}</td>
-        <td>{{ user.lastName }}</td>
-        <td>{{ user.email }}</td>
-        <td>
-          <button class="btn btn-success" (click)="viewUser(user.userID)">
-            <i class="fa fa-eye" aria-hidden="true"></i>
-          </button>
-        </td>
+      <tr class="each-row" *ngFor="let role of roleList">
+        <td>{{ role.roleID }}</td>
+        <td>{{ role.roleName }}</td>
         <td>
           <button
             class="btn btn-danger"
             data-bs-toggle="modal"
             data-bs-target="#deleteModal"
-            (click)="onDeleteUser(user.userID)"
+            (click)="onDeleteRole(role.roleID)"
           >
             X
           </button>
@@ -50,7 +57,9 @@
   >
     <div class="modal-content decorate-modal">
       <div class="modal-header">
-        <h5 class="modal-title" id="commentModalLabel">Delete Employee</h5>
+        <h5 class="modal-title" id="commentModalLabel">
+          Remove Role/Designation
+        </h5>
         <button
           type="button"
           id="close-emp-comment"
@@ -60,11 +69,11 @@
         ></button>
       </div>
       <div class="modal-body">
-        <p class="fw-bold fst-italic">Remove Employee Record?</p>
+        <p class="fw-bold fst-italic">Remove Selected Role / Designation?</p>
       </div>
       <div class="text-center my-2">
-        <button type="button" class="btn btn-danger" (click)="deleteUser()">
-          Delete Employee
+        <button type="button" class="btn btn-danger" (click)="deleteRole()">
+          Remove Role
         </button>
       </div>
     </div>

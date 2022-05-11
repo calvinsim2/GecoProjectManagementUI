@@ -8,6 +8,7 @@ import { IndProjectComponent } from './ind-project/ind-project.component';
 import { MyProjectsComponent } from './my-projects/my-projects.component';
 import { AllUserComponent } from './all-user/all-user.component';
 import { IndUserComponent } from './ind-user/ind-user.component';
+import { RoleComponent } from './role/role.component';
 // import { AuthGuard } from '../shared/guards/auth.guard';
 
 const routes: Routes = [
@@ -22,6 +23,7 @@ const routes: Routes = [
       { path: 'myprojects/:id', component: MyProjectsComponent },
       { path: 'users', component: AllUserComponent },
       { path: 'users/:id', component: IndUserComponent },
+      { path: 'roles', component: RoleComponent },
     ],
   },
 ];

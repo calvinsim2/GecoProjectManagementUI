@@ -29,4 +29,8 @@ export class ManagementComponent implements OnInit {
   navigateToUsers() {
     this.router.navigate(['management/users']);
   }
+
+  navigateToRoles() {
+    this.router.navigate(['management/roles']);
+  }
 }

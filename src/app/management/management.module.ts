@@ -11,6 +11,7 @@ import { IndProjectComponent } from './ind-project/ind-project.component';
 import { MyProjectsComponent } from './my-projects/my-projects.component';
 import { AllUserComponent } from './all-user/all-user.component';
 import { IndUserComponent } from './ind-user/ind-user.component';
+import { RoleComponent } from './role/role.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { IndUserComponent } from './ind-user/ind-user.component';
     MyProjectsComponent,
     AllUserComponent,
     IndUserComponent,
+    RoleComponent,
   ],
   imports: [CommonModule, ManagementRoutingModule, ReactiveFormsModule],
 })
