@@ -1,1 +1,35 @@
-<p>all-projects works!</p>
+<div class="container">
+  <div class="text-end">
+    <a class="btn btn-primary" [routerLink]="'../editor'"> Add Project </a>
+  </div>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Project ID</th>
+        <th scope="col">Project Name</th>
+        <th scope="col">Description</th>
+        <th scope="col">Client ID</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let project of _projects; index as i">
+        <td>{{ project.projectID }}</td>
+        <td>{{ project.projectName }}</td>
+        <td>
+          <!-- <div [innerHtml]="getFirstSnippet(post.description)"></div> -->
+          <div>{{ project.projectDescription }}</div>
+        </td>
+        <td>{{ project.clientID }}</td>
+        <td>
+          <button class="button">Edit</button>
+        </td>
+        <td>
+          <button class="button">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

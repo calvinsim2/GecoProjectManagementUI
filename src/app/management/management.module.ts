@@ -13,7 +13,15 @@ import { AllUserComponent } from './all-user/all-user.component';
 import { IndUserComponent } from './ind-user/ind-user.component';
 
 @NgModule({
-  declarations: [ManagementComponent, DashboardComponent, AllProjectsComponent, IndProjectComponent, MyProjectsComponent, AllUserComponent, IndUserComponent],
+  declarations: [
+    ManagementComponent,
+    DashboardComponent,
+    AllProjectsComponent,
+    IndProjectComponent,
+    MyProjectsComponent,
+    AllUserComponent,
+    IndUserComponent,
+  ],
   imports: [CommonModule, ManagementRoutingModule, ReactiveFormsModule],
 })
 export class ManagementModule {}
