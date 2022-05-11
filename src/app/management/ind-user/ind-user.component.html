@@ -1,1 +1,148 @@
-<p>ind-user works!</p>
+<div class="content container-fluid">
+  <div class="page-header d-flex justify-content-between">
+    <div class="page-title myheader">
+      <p>Profile</p>
+    </div>
+  </div>
+</div>
+<div class="container-fluid">
+  <div class="card">
+    <div class="card-body">
+      <div class="profile-view">
+        <div *ngIf="userData" class="profile-basic">
+          <div class="row">
+            <div class="col-md-5">
+              <div class="profile-info-left">
+                <h3 class="user-name m-t-0 mb-0">
+                  {{ userData.firstName }} {{ userData.lastName }}
+                </h3>
+                <h6 class="text-muted">{{ userData.email }}</h6>
+                <small class="text-muted">{{ userData.designation }}</small>
+                <div class="staff-id">Employee ID : {{ userData.userID }}</div>
+                <!-- <div class="small doj text-muted">
+                    Date of Join : {{ userData.startDate | date }}
+                  </div> -->
+              </div>
+            </div>
+            <div class="col-md-7">
+              <ul class="personal-info">
+                <li>
+                  <div class="title">Role:</div>
+                  <div class="text">
+                    <p>{{ userData.role }}</p>
+                  </div>
+                </li>
+                <!-- <li>
+                    <div class="title">Email:</div>
+                    <div class="text">
+                      <a href="">{{ empData.email }}</a>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="title">Address:</div>
+                    <div class="text">{{ empData.address }}</div>
+                  </li> -->
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid text-center mt-2">
+  <button
+    *ngIf="isActualUser"
+    class="btn btn-success"
+    data-bs-toggle="modal"
+    data-bs-target="#userModal"
+    (click)="onEditUser()"
+  >
+    Edit Details
+  </button>
+</div>
+
+<!-- Edit User Modal  -->
+
+<div
+  class="modal fade"
+  id="userModal"
+  tabindex="-1"
+  aria-labelledby="userLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content decorate-modal">
+      <div class="modal-header">
+        <h5 class="modal-title" id="userModalLabel">Change is good!</h5>
+        <button
+          type="button"
+          id="close-emp"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <!-- Edit user details form -->
+      <div class="modal-body">
+        <form [formGroup]="userForm">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label class="col-form-label"
+                  >Username <span class="text-danger">*</span></label
+                >
+                <input
+                  type="text"
+                  formControlName="Username"
+                  class="form-control"
+                />
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label class="col-form-label"
+                  >Email <span class="text-danger">*</span></label
+                >
+                <input
+                  type="text"
+                  formControlName="Email"
+                  class="form-control"
+                />
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label class="col-form-label"
+                  >FirstName <span class="text-danger">*</span></label
+                >
+                <input
+                  type="text"
+                  formControlName="FirstName"
+                  class="form-control"
+                />
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label class="col-form-label"
+                  >LastName <span class="text-danger">*</span></label
+                >
+                <input
+                  type="text"
+                  formControlName="LastName"
+                  class="form-control"
+                />
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" (click)="updateUser()">
+          Update Details
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

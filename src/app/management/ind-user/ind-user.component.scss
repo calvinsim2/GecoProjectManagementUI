@@ -1,0 +1,100 @@
+.profile-view {
+  position: relative;
+}
+
+.profile-view .profile-img-wrap {
+  height: 120px;
+  width: 120px;
+}
+
+.profile-img-wrap {
+  height: 120px;
+  position: absolute;
+  width: 120px;
+  background: #fff;
+  overflow: hidden;
+}
+
+.profile-view .profile-basic {
+  margin-left: 140px;
+  padding-right: 50px;
+}
+
+.profile-info-left {
+  border-right: 2px dashed #ccc;
+}
+
+.user-name {
+  color: #333;
+}
+
+.staff-id {
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 5px;
+}
+
+.staff-msg {
+  margin-top: 30px;
+}
+
+.personal-info {
+  list-style: none;
+  margin-bottom: 0;
+  padding: 0;
+}
+
+.personal-info li .title {
+  color: #4f4f4f;
+  float: left;
+  font-weight: 500;
+  margin-right: 30px;
+  width: 25%;
+}
+
+.personal-info li .text {
+  color: #8e8e8e;
+  display: block;
+  overflow: hidden;
+}
+
+.profile-view .pro-edit {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.edit-icon {
+  background-color: #eee;
+  border: 1px solid #e3e3e3;
+  border-radius: 24px;
+  color: #bbb;
+  float: right;
+  font-size: 12px;
+  line-height: 24px;
+  min-height: 26px;
+  text-align: center;
+  width: 26px;
+}
+
+.profile-img-wrap img {
+  border-radius: 50%;
+  height: 120px;
+  width: 120px;
+  object-fit: cover;
+}
+
+.decorate-modal {
+  background: radial-gradient(
+    circle at center,
+    rgb(255, 250, 205),
+    rgb(224, 255, 255)
+  );
+}
+
+.myheader {
+  font-family: "Updock", cursive;
+  font-size: 50px;
+  font-weight: bold;
+  color: gold;
+}
