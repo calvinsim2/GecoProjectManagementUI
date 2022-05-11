@@ -1,7 +1,18 @@
 <div class="container">
   <div class="text-end">
-    <a class="btn btn-primary" [routerLink]="'../editor'"> Add Project </a>
+    <!-- Button trigger modal -->
+    <button
+      type="button"
+      class="btn btn-primary"
+      data-bs-toggle="modal"
+      data-bs-target="#productModal"
+      (click)="isEdit = false"
+    >
+      Add Project
+    </button>
   </div>
+
+  <!-- Button trigger modal -->
 
   <table class="table table-striped">
     <thead>
@@ -19,7 +30,6 @@
         <td>{{ project.projectID }}</td>
         <td>{{ project.projectName }}</td>
         <td>
-          <!-- <div [innerHtml]="getFirstSnippet(post.description)"></div> -->
           <div>{{ project.projectDescription }}</div>
         </td>
         <td>{{ project.clientID }}</td>
@@ -27,9 +37,146 @@
           <button class="button">Edit</button>
         </td>
         <td>
-          <button class="button">Delete</button>
+          <button class="button" (click)="deleteProject(project.projectID)">
+            Delete
+          </button>
         </td>
       </tr>
     </tbody>
   </table>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="productModal"
+  tabindex="-1"
+  aria-labelledby="productModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="productModalLabel">Add Project</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <form [formGroup]="projectForm" (ngSubmit)="submit()">
+        <div class="modal-body">
+          <div class="row">
+            <label class="col" for="projectNameInput">Project Name</label>
+            <input
+              id="projectNameInput"
+              name="projectNameInput"
+              class="col"
+              type="text"
+              formControlName="projectName"
+              size="50"
+            />
+          </div>
+          <div class="row">
+            <label class="col" for="projectDescription">Project Name</label>
+            <input
+              id="projectDescription"
+              name="projectDescription"
+              class="col"
+              type="text"
+              formControlName="projectDescription"
+              size="50"
+            />
+          </div>
+          <div class="row">
+            <label class="col" for="planStartDate">Planned Start Date</label>
+            <input
+              class="col"
+              type="date"
+              id="planStartDate"
+              name="planStartDate"
+              formControlName="planStartDate"
+            />
+          </div>
+          <div class="row">
+            <label class="col" for="planEndDate">Planned End Date</label>
+            <input
+              class="col"
+              type="date"
+              id="planEndDate"
+              name="planEndDate"
+            />
+          </div>
+          <div class="row">
+            <label class="col" for="actualStartDate">Actual Start Date</label>
+            <input
+              class="col"
+              type="date"
+              id="actualStartDate"
+              name="actualStartDate"
+              formControlName="actualStartDate"
+            />
+          </div>
+          <div class="row">
+            <label class="col" for="actualEndDate">Actual End Date</label>
+            <input
+              class="col"
+              type="date"
+              id="actualEndDate"
+              name="actualEndDate"
+            />
+          </div>
+          <div class="row">
+            <div class="col">
+              <label for="clientID">Client ID</label>
+            </div>
+            <div class="col">
+              <select
+                class="form-select"
+                id="clientID"
+                name="clientID"
+                aria-label="clientID"
+              >
+                <option selected>Open this select menu</option>
+                <ng-container *ngFor="let client of _clientNames">
+                  <option [value]="client.clientID">
+                    {{ client.clientname }}
+                  </option>
+                </ng-container>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label for="projectManagerID">Project Manager ID</label>
+            </div>
+            <div class="col">
+              <select
+                class="form-select"
+                id="projectManagerID"
+                name="projectManagerID"
+                aria-label="projectManagerID"
+              >
+                <option selected>Open this select menu</option>
+                <ng-container *ngFor="let user of _userNames">
+                  <option [value]="user.userID">{{ user.username }}</option>
+                </ng-container>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+          <button type="button" class="btn btn-primary">Apply</button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>

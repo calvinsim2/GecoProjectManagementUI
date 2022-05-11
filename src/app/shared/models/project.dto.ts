@@ -1,4 +1,4 @@
-export class ProjectModel {
+export class ProjectDto {
   projectID!: number;
   projectName!: string;
   planStartDate!: Date;
