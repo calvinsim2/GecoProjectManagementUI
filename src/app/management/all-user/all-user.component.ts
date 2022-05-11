@@ -9,7 +9,8 @@ import { UserService } from 'src/app/shared/services/user.service';
   styleUrls: ['./all-user.component.scss'],
 })
 export class AllUserComponent implements OnInit {
-  userList: any = [];
+  public userList: any = [];
+
   currentSelectedUserIDtoDelete!: any;
 
   constructor(
