@@ -1,0 +1,126 @@
+<p>client works!</p>
+<div class="container">
+  <div class="text-end">
+    <!-- Button trigger modal -->
+    <button
+      type="button"
+      class="btn btn-primary"
+      data-bs-toggle="modal"
+      data-bs-target="#clientModal"
+      (click)="clearClientForm()"
+    >
+      Add Client
+    </button>
+  </div>
+  <!-- table -->
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Client ID</th>
+        <th scope="col">Client Name</th>
+        <th scope="col">Client Address</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let client of _clients; index as i">
+        <td>{{ client.clientID }}</td>
+        <td>{{ client.clientName }}</td>
+        <td>{{ client.clientAddress }}</td>
+        <td>
+          <button
+            class="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#clientModal"
+            (click)="loadClientForm(client.clientID)"
+          >
+            Edit
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<!-- end of table -->
+<!-- modal -->
+<div
+  class="modal fade"
+  id="clientModal"
+  tabindex="-1"
+  aria-labelledby="clientLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="clientLabel">
+          {{ "Client" }}
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="clientForm">
+          <div class="row">
+            <div class="col">
+              <label for="clientIDInput">Client ID</label>
+            </div>
+            <div class="col">
+              <!-- TODO change this to label -->
+              <input
+                id="clientIDInput"
+                name="clientIDInput"
+                type="text"
+                readonly="readonly"
+                formControlName="clientID"
+                size="50"
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label for="clientNameInput">Client Name</label>
+            </div>
+            <div class="col">
+              <input
+                id="clientNameInput"
+                name="clientNameInput"
+                type="text"
+                formControlName="clientName"
+                size="50"
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label for="clientIDInput">Client Address</label>
+            </div>
+            <div class="col">
+              <input
+                id="clientAddressInput"
+                name="clientAddressInput"
+                type="text"
+                formControlName="clientAddress"
+                size="50"
+              />
+            </div>
+          </div>
+          <button type="button" class="btn btn-primary" (click)="submit()">
+            {{ isEdit ? "Update Client" : "Add Client" }}
+          </button>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
