@@ -12,6 +12,7 @@ import { MyProjectsComponent } from './my-projects/my-projects.component';
 import { AllUserComponent } from './all-user/all-user.component';
 import { IndUserComponent } from './ind-user/ind-user.component';
 import { RoleComponent } from './role/role.component';
+import { ClientComponent } from './client/client.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { RoleComponent } from './role/role.component';
     AllUserComponent,
     IndUserComponent,
     RoleComponent,
+    ClientComponent,
   ],
   imports: [CommonModule, ManagementRoutingModule, ReactiveFormsModule],
 })

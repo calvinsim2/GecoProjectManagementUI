@@ -11,4 +11,17 @@ export class ClientService {
   getClients() {
     return this._httpclient.get(GlobalComponent.apiRootUrl + 'client');
   }
+
+  getClient(id: number) {
+    return this._httpclient.get(GlobalComponent.apiRootUrl + 'client/' + id);
+  }
+  addClient(client: FormData) {
+    return this._httpclient.post(GlobalComponent.apiRootUrl + 'client', client);
+  }
+  updateClient(client: FormData) {
+    return this._httpclient.put(
+      GlobalComponent.apiRootUrl + 'client/update',
+      client
+    );
+  }
 }
