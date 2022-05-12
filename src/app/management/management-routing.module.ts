@@ -9,6 +9,7 @@ import { MyProjectsComponent } from './my-projects/my-projects.component';
 import { AllUserComponent } from './all-user/all-user.component';
 import { IndUserComponent } from './ind-user/ind-user.component';
 import { RoleComponent } from './role/role.component';
+import { TeamComponent } from './team/team.component';
 import { ClientComponent } from './client/client.component';
 // import { AuthGuard } from '../shared/guards/auth.guard';
 
@@ -25,6 +26,7 @@ const routes: Routes = [
       { path: 'users', component: AllUserComponent },
       { path: 'users/:id', component: IndUserComponent },
       { path: 'roles', component: RoleComponent },
+      { path: 'teams', component: TeamComponent },
       { path: 'client', component: ClientComponent },
     ],
   },

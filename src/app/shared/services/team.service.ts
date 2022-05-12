@@ -15,4 +15,24 @@ export class TeamService {
   getIndividualTeam(id: any) {
     return this._httpclient.get<any>(GlobalComponent.apiRootUrl + 'team/' + id);
   }
+
+  addTeam(formData: any) {
+    return this._httpclient.post<any>(
+      GlobalComponent.apiRootUrl + 'team/add',
+      formData
+    );
+  }
+
+  updateTeam(formData: any) {
+    return this._httpclient.put<any>(
+      GlobalComponent.apiRootUrl + 'team/update',
+      formData
+    );
+  }
+
+  deleteTeam(id: any) {
+    return this._httpclient.delete<any>(
+      GlobalComponent.apiRootUrl + 'team/' + id
+    );
+  }
 }
