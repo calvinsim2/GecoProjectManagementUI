@@ -7,19 +7,19 @@
 </div>
 <div class="text-center">
   <div class="row bg-secondary">
-    <div class="col p-2 border border-1 rounded" style="background: #c0c0c0">
+    <div class="col p-2 border border-1 rounded" style="background: #ffebcd">
       <div class="text-center">
         <div>
           <p class="fw-bold fst-italic">Welcome {{ managerName }}</p>
         </div>
       </div>
     </div>
-    <div class="col p-2 border border-1 rounded" style="background: #c0c0c0">
+    <div class="col p-2 border border-1 rounded" style="background: #ffebcd">
       <div class="text-center">
         <p class="fw-bold fst-italic">On-going Projects</p>
         <div *ngIf="!isProjectByManagerEmpty">
           <div *ngFor="let project of projectsByManagerList; let i = index">
-            <div *ngIf="i < 2">
+            <div *ngIf="i < 3">
               <div class="eachcolumn text-center">
                 <h4>{{ project.projectName }}</h4>
                 <p>Client : {{ project.client.clientName }}</p>
@@ -33,7 +33,7 @@
         </div>
       </div>
     </div>
-    <div class="col p-2 border border-1 rounded" style="background: #c0c0c0">
+    <div class="col p-2 border border-1 rounded" style="background: #ffebcd">
       <div class="text-center">
         <p class="fw-bold fst-italic">Your Team</p>
       </div>

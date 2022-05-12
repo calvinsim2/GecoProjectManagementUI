@@ -33,7 +33,13 @@ export class LoginComponent implements OnInit {
         next: (res) => {
           localStorage.setItem('token', res.token);
 
-          this.router.navigate([`management/dashboard`]);
+          if (this.authService.getProjectManagerStatus()) {
+            this.router.navigate([`management/dashboard`]);
+          } else {
+            this.router.navigate([
+              `management/users/${this.authService.getLoggedInUserID()}`,
+            ]);
+          }
         },
         error: (err) => {
           alert(`${err.error.statusCode} - ${err.error.message}`);

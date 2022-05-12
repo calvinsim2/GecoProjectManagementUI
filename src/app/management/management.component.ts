@@ -10,12 +10,16 @@ import { AuthService } from '../shared/services/auth.service';
 export class ManagementComponent implements OnInit {
   userId!: any;
   loginStatus!: boolean;
+  isProjectManager: boolean = false;
 
   constructor(private router: Router, private authService: AuthService) {}
 
   ngOnInit(): void {
     this.userId = this.authService.getLoggedInUserID();
     this.loginStatus = this.authService.isUserLogin() ? true : false;
+    this.isProjectManager = this.authService.getProjectManagerStatus()
+      ? true
+      : false;
   }
 
   logOut() {
@@ -44,5 +48,9 @@ export class ManagementComponent implements OnInit {
   }
   navigateToClient() {
     this.router.navigate(['management/client']);
+  }
+
+  navigateToOwnProfile() {
+    this.router.navigate([`management/users/${this.userId}`]);
   }
 }
