@@ -50,6 +50,10 @@ export class ManagementComponent implements OnInit {
     this.router.navigate(['management/client']);
   }
 
+  navigateToTeams() {
+    this.router.navigate(['management/teams']);
+  }
+
   navigateToOwnProfile() {
     this.router.navigate([`management/users/${this.userId}`]);
   }

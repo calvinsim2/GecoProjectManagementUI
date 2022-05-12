@@ -54,6 +54,13 @@
     >
       Client
     </button>
+    <button
+      *ngIf="isProjectManager"
+      (click)="navigateToTeams()"
+      class="btn sidebtn text-center"
+    >
+      Teams
+    </button>
     <br />
     <button
       *ngIf="loginStatus"
