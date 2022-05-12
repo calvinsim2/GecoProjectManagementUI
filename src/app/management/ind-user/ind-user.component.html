@@ -56,6 +56,15 @@
   >
     Edit Details
   </button>
+  <button
+    *ngIf="isProjectManager"
+    class="btn btn-success"
+    data-bs-toggle="modal"
+    data-bs-target="#userModal"
+    (click)="onEditTeams()"
+  >
+    Assign Team
+  </button>
 </div>
 
 <!-- Edit User Modal  -->
@@ -81,7 +90,7 @@
       </div>
       <!-- Edit user details form -->
       <div class="modal-body">
-        <form [formGroup]="userForm">
+        <form *ngIf="!isEditingTeams" [formGroup]="userForm">
           <div class="row">
             <div class="col-sm-6">
               <div class="form-group">
@@ -150,10 +159,44 @@
             </div>
           </div>
         </form>
+        <form *ngIf="isEditingTeams" [formGroup]="teamForm">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label class="col-form-label"
+                  >Teams <span class="text-danger">*</span></label
+                >
+                <select
+                  formControlName="TeamID"
+                  class="form-select"
+                  aria-label="Default select example"
+                >
+                  <option selected value="">Select Team</option>
+                  <ng-container *ngFor="let team of teamList">
+                    <option [ngValue]="team.teamID">{{ team.teamName }}</option>
+                  </ng-container>
+                </select>
+              </div>
+            </div>
+          </div>
+        </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-success" (click)="updateUser()">
+        <button
+          *ngIf="isActualUser && !isEditingTeams"
+          type="button"
+          class="btn btn-success"
+          (click)="updateUser()"
+        >
           Update Details
+        </button>
+        <button
+          *ngIf="isProjectManager && isEditingTeams"
+          type="button"
+          class="btn btn-success"
+          (click)="editTeams()"
+        >
+          Assign Team
         </button>
       </div>
     </div>

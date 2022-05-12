@@ -36,6 +36,14 @@ export class UserService {
     );
   }
 
+  updateUserTeam(empObj: any) {
+    return this.http.put<any>(
+      `${this.baseApiUrl}team/update`,
+      empObj,
+      this.authService.httpOptionsProvider()
+    );
+  }
+
   deleteUser(id: any) {
     return this.http.delete<any>(
       `${this.baseApiUrl}${id}`,
