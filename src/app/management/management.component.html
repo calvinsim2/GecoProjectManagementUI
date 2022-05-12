@@ -30,6 +30,13 @@
     >
       Projects
     </button>
+    <button
+      *ngIf="isProjectManager"
+      (click)="navigateToClient()"
+      class="btn sidebtn text-center"
+    >
+      Client
+    </button>
     <button (click)="navigateToMyProjects()" class="btn sidebtn text-center">
       My Projects
     </button>
@@ -46,13 +53,6 @@
       class="btn sidebtn text-center"
     >
       Roles
-    </button>
-    <button
-      *ngIf="isProjectManager"
-      (click)="navigateToClient()"
-      class="btn sidebtn text-center"
-    >
-      Client
     </button>
     <button
       *ngIf="isProjectManager"
