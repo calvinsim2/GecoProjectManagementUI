@@ -52,20 +52,20 @@
         </td>
         <td>
           <button
-            class="btn btn-danger"
-            (click)="deleteProject(project.projectID)"
-          >
-            X
-          </button>
-        </td>
-        <td>
-          <button
             class="btn btn-success"
             data-bs-toggle="modal"
             data-bs-target="#projectMemberModal"
             (click)="setProjectIDAndReloadProjectMember(project.projectID)"
           >
             Add Member
+          </button>
+        </td>
+        <td>
+          <button
+            class="btn btn-danger"
+            (click)="deleteProject(project.projectID)"
+          >
+            X
           </button>
         </td>
       </tr>
@@ -82,7 +82,7 @@
   aria-hidden="true"
 >
   <div class="modal-dialog">
-    <div class="modal-content">
+    <div class="modal-content decorate-modal">
       <div class="modal-header">
         <h5 class="modal-title" id="productModalLabel">
           {{ isEdit ? "Edit Project" : "Add Project" }}
@@ -96,7 +96,7 @@
       </div>
       <form [formGroup]="projectForm" (ngSubmit)="submit()">
         <div class="modal-body">
-          <div class="row">
+          <div class="row mb-2">
             <label class="col" for="projectNameInput">Project Name</label>
             <input
               id="projectNameInput"
@@ -107,7 +107,7 @@
               size="50"
             />
           </div>
-          <div class="row">
+          <div class="row mb-2">
             <label class="col" for="projectDescription"
               >Project Description</label
             >
@@ -120,7 +120,7 @@
               size="50"
             />
           </div>
-          <div class="row">
+          <div class="row mb-2">
             <label class="col" for="planStartDate">Planned Start Date</label>
             <input
               class="col"
@@ -130,7 +130,7 @@
               formControlName="planStartDate"
             />
           </div>
-          <div class="row">
+          <div class="row mb-2">
             <label class="col" for="planEndDate">Planned End Date</label>
             <input
               class="col"
@@ -140,7 +140,7 @@
               formControlName="planEndDate"
             />
           </div>
-          <div class="row">
+          <div class="row mb-2">
             <label class="col" for="actualStartDate">Actual Start Date</label>
             <input
               class="col"
@@ -150,7 +150,7 @@
               formControlName="actualStartDate"
             />
           </div>
-          <div class="row">
+          <div class="row mb-2">
             <label class="col" for="actualEndDate">Actual End Date</label>
             <input
               class="col"
@@ -160,7 +160,7 @@
               formControlName="actualEndDate"
             />
           </div>
-          <div class="row">
+          <div class="row mb-2">
             <div class="col">
               <label for="clientID">Client ID</label>
             </div>
@@ -231,7 +231,7 @@
   aria-hidden="true"
 >
   <div class="modal-dialog">
-    <div class="modal-content">
+    <div class="modal-content decorate-modal">
       <div class="modal-header">
         <h5 class="modal-title" id="projectMemberLabel">
           {{ "Project Member" }}
