@@ -237,6 +237,7 @@ export class AllProjectsComponent implements OnInit {
       next: (res: any) => {
         console.log('res', res);
         this.reloadProjectMembers(this._targetProjectID);
+        this.reloadFilteredUsers();
       },
       error: (err: any) => {
         console.log(err);
