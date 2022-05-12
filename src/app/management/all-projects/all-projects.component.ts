@@ -122,15 +122,7 @@ export class AllProjectsComponent implements OnInit {
         console.log(err);
       },
     });
-    this._userService.getAllUser().subscribe({
-      next: (res: any) => {
-        // console.log(res);
-        this._userNames = res.result;
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
+    this.reloadFilteredUsers();
     this._clientService.getClients().subscribe({
       next: (res: any) => {
         // console.log(res);
@@ -142,9 +134,27 @@ export class AllProjectsComponent implements OnInit {
     });
   }
 
+  reloadFilteredUsers() {
+    this._userService.getAllUser().subscribe({
+      next: (res: any) => {
+        // console.log(res);
+        this._userNames = res.result.filter(
+          (user: User) =>
+            !this._projectMembers.some(
+              (projectMember) => projectMember.userID === user.userID
+            )
+        );
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+
   setProjectIDAndReloadProjectMember(projectID: number) {
     this._targetProjectID = projectID;
     this.reloadProjectMembers(projectID);
+    this.reloadFilteredUsers();
   }
 
   reloadProjectMembers(id: number) {
@@ -215,6 +225,7 @@ export class AllProjectsComponent implements OnInit {
         next: (res: any) => {
           console.log('res', res);
           this.reloadProjectMembers(this._targetProjectID);
+          this.reloadFilteredUsers();
         },
         error: (err: any) => {
           console.log(err);
@@ -226,6 +237,7 @@ export class AllProjectsComponent implements OnInit {
       next: (res: any) => {
         console.log('res', res);
         this.reloadProjectMembers(this._targetProjectID);
+        this.reloadFilteredUsers();
       },
       error: (err: any) => {
         console.log(err);
