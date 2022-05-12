@@ -62,8 +62,9 @@ export class AuthService {
     if (this.isUserLogin()) {
       let token = this.getToken();
       let decodedJWT = JSON.parse(window.atob(token?.split('.')[1]));
-      return decodedJWT.IsProjectManager ? decodedJWT.IsProjectManager : false;
+      return decodedJWT.IsProjectManager == 'True' ? true : false;
     }
+    return false;
   }
 
   logout() {

@@ -7,28 +7,52 @@
       </button>
     </div>
     <div class="text-center">
-      <button *ngIf="loginStatus" class="btn btn-success" (click)="logOut()">
+      <button
+        *ngIf="loginStatus"
+        class="btn btn-success"
+        (click)="navigateToOwnProfile()"
+      >
         Profile
       </button>
     </div>
   </h3>
   <div class="text-center">
-    <button (click)="navigateToDashBoard()" class="btn sidebtn text-center">
+    <button
+      *ngIf="isProjectManager"
+      (click)="navigateToDashBoard()"
+      class="btn sidebtn text-center"
+    >
       DashBoard
     </button>
-    <button (click)="navigateToProjects()" class="btn sidebtn text-center">
+    <button
+      *ngIf="isProjectManager"
+      (click)="navigateToProjects()"
+      class="btn sidebtn text-center"
+    >
       Projects
     </button>
     <button (click)="navigateToMyProjects()" class="btn sidebtn text-center">
       My Projects
     </button>
-    <button (click)="navigateToUsers()" class="btn sidebtn text-center">
+    <button
+      *ngIf="isProjectManager"
+      (click)="navigateToUsers()"
+      class="btn sidebtn text-center"
+    >
       Employees
     </button>
-    <button (click)="navigateToRoles()" class="btn sidebtn text-center">
+    <button
+      *ngIf="isProjectManager"
+      (click)="navigateToRoles()"
+      class="btn sidebtn text-center"
+    >
       Roles
     </button>
-    <button (click)="navigateToClient()" class="btn sidebtn text-center">
+    <button
+      *ngIf="isProjectManager"
+      (click)="navigateToClient()"
+      class="btn sidebtn text-center"
+    >
       Client
     </button>
   </div>
