@@ -12,9 +12,11 @@ import { TeamService } from 'src/app/shared/services/team.service';
 export class DashboardComponent implements OnInit {
   managerName!: any;
   managerData!: any;
+  managerTeamId!: any;
   projectsByManagerList!: any;
   isProjectByManagerEmpty!: boolean;
-  allTeamsList!: any;
+  teamName!: any;
+  teamsList!: any;
   isTeamsListEmpty!: boolean;
 
   constructor(
@@ -30,7 +32,6 @@ export class DashboardComponent implements OnInit {
     // console.log(this.authService.getProjectManagerStatus());
     this.getManagerDetails();
     this.getProjectRelatedToManager();
-    this.getAllTeams();
   }
 
   getManagerDetails() {
@@ -40,6 +41,8 @@ export class DashboardComponent implements OnInit {
         next: (res) => {
           this.managerData = res.result;
           this.managerName = res.result.firstName + ' ' + res.result.lastName;
+          this.managerTeamId = res.result.teamID;
+          this.getTeam();
         },
         error: (err) => {
           alert('Unable to obtain name');
@@ -81,15 +84,16 @@ export class DashboardComponent implements OnInit {
       });
   }
 
-  getAllTeams() {
-    this.teamService.getAllTeams().subscribe({
+  getTeam() {
+    this.teamService.getIndividualTeam(this.managerTeamId).subscribe({
       next: (res) => {
-        this.allTeamsList = res.result;
-        if (res.result.length < 1) {
-          this.allTeamsList = [];
+        console.log(res.result);
+        this.teamName = res.result.teamName;
+        if (res.result.user.length < 1) {
+          this.teamsList = [];
           this.isTeamsListEmpty = true;
         } else {
-          this.allTeamsList = res.result;
+          this.teamsList = res.result.user;
           this.isTeamsListEmpty = false;
         }
       },
