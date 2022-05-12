@@ -1,15 +1,21 @@
 <div class="container">
-  <div class="text-end">
-    <!-- Button trigger modal -->
-    <button
-      type="button"
-      class="btn btn-primary"
-      data-bs-toggle="modal"
-      data-bs-target="#productModal"
-      (click)="clearProjectForm()"
-    >
-      Add Project
-    </button>
+  <div class="d-flex justify-content-between align-items-center">
+    <div class="page-title myheader">
+      <p>All Projects</p>
+    </div>
+    <div>
+      <!-- Button trigger modal -->
+      <button
+        type="button"
+        class="btn btn-success"
+        data-bs-toggle="modal"
+        data-bs-target="#productModal"
+        (click)="clearProjectForm()"
+      >
+        <i class="fa fa-plus"></i>
+        Add Project
+      </button>
+    </div>
   </div>
 
   <!-- Button trigger modal -->
@@ -21,6 +27,7 @@
         <th scope="col">Project Name</th>
         <th scope="col">Description</th>
         <th scope="col">Client ID</th>
+        <th scope="col"></th>
         <th scope="col"></th>
         <th scope="col"></th>
       </tr>
@@ -44,13 +51,16 @@
           </button>
         </td>
         <td>
-          <button class="button" (click)="deleteProject(project.projectID)">
-            Delete
+          <button
+            class="btn btn-danger"
+            (click)="deleteProject(project.projectID)"
+          >
+            X
           </button>
         </td>
         <td>
           <button
-            class="button"
+            class="btn btn-success"
             data-bs-toggle="modal"
             data-bs-target="#projectMemberModal"
             (click)="setProjectIDAndReloadProjectMember(project.projectID)"
