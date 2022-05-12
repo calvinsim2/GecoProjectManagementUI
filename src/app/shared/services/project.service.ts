@@ -21,6 +21,17 @@ export class ProjectService {
     );
   }
 
+  getProjectMembers() {
+    return this._httpclient.get<any>(
+      GlobalComponent.apiRootUrl + 'projectmember'
+    );
+  }
+  getProjectMembersByProjectID(id: number) {
+    return this._httpclient.get<any>(
+      GlobalComponent.apiRootUrl + 'projectmember/project/' + id
+    );
+  }
+
   addProject(project: FormData) {
     return this._httpclient.post(
       GlobalComponent.apiRootUrl + 'project',
@@ -28,6 +39,12 @@ export class ProjectService {
     );
   }
 
+  addMemberToProject(projectMember: FormData) {
+    return this._httpclient.post(
+      GlobalComponent.apiRootUrl + 'projectmember',
+      projectMember
+    );
+  }
   editProject(project: FormData) {
     return this._httpclient.put(
       GlobalComponent.apiRootUrl + 'project/update',
@@ -38,6 +55,11 @@ export class ProjectService {
   deleteProject(id: number) {
     return this._httpclient.delete(
       GlobalComponent.apiRootUrl + 'project/' + id
+    );
+  }
+  removeMemberFromProject(id: number) {
+    return this._httpclient.delete(
+      GlobalComponent.apiRootUrl + 'projectmember/' + id
     );
   }
 }

@@ -15,6 +15,13 @@ type User = {
   username: string;
 };
 
+type ProjectMember = {
+  projectMemberID: number;
+  userID: number;
+  user: User;
+  projectID: number;
+};
+
 @Component({
   selector: 'app-all-projects',
   templateUrl: './all-projects.component.html',
@@ -24,7 +31,10 @@ export class AllProjectsComponent implements OnInit {
   public _projects: Array<ProjectDto> = [];
   public _clientNames: Array<Client> = [];
   public _userNames: Array<User> = [];
+  public _projectMembers: Array<ProjectMember> = [];
+  public _targetProjectID: number = 0;
   public projectForm: FormGroup;
+  public projectMemberForm: FormGroup;
   public isEdit: boolean = false;
 
   constructor(
@@ -44,9 +54,15 @@ export class AllProjectsComponent implements OnInit {
       clientID: 0,
       projectManagerID: 0,
     });
+
+    this.projectMemberForm = this.fb.group({
+      projectMemberID: 0,
+      projectID: 0,
+      userID: 0,
+    });
   }
 
-  clearForm() {
+  clearProjectForm() {
     this.isEdit = false;
     this.projectForm.setValue({
       projectID: 0,
@@ -94,7 +110,7 @@ export class AllProjectsComponent implements OnInit {
     this._projectService.getProjects().subscribe({
       next: (res: any) => {
         // console.log(res);
-        this._projects = res.result;
+        this._projects = [...res.result];
       },
       error: (err) => {
         console.log(err);
@@ -120,11 +136,28 @@ export class AllProjectsComponent implements OnInit {
     });
   }
 
+  setProjectIDAndReloadProjectMember(projectID: number) {
+    this._targetProjectID = projectID;
+    this.reloadProjectMembers(projectID);
+  }
+
+  reloadProjectMembers(id: number) {
+    this._projectService.getProjectMembersByProjectID(id).subscribe({
+      next: (res: any) => {
+        console.log(res.result);
+        this._projectMembers = res.result;
+      },
+      error: (err: any) => {
+        console.log(err);
+      },
+    });
+  }
   addProject() {
     console.log(this.projectForm.value);
     this._projectService.addProject(this.projectForm.value).subscribe({
       next: (res) => {
         console.log('res', res);
+        this.reloadPost();
       },
       error: (err) => {
         console.log('err', err);
@@ -149,6 +182,7 @@ export class AllProjectsComponent implements OnInit {
     this._projectService.editProject(this.projectForm.value).subscribe({
       next: (res) => {
         console.log('res', res);
+        this.reloadPost();
       },
       error: (err) => {
         console.log('err', err);
@@ -163,5 +197,34 @@ export class AllProjectsComponent implements OnInit {
       this.addProject();
     }
     this.reloadPost();
+  }
+
+  addMemberToProject() {
+    this.projectMemberForm.patchValue({
+      projectID: this._targetProjectID,
+    });
+    console.log(this.projectMemberForm.value['UserID']);
+    this._projectService
+      .addMemberToProject(this.projectMemberForm.value)
+      .subscribe({
+        next: (res: any) => {
+          console.log('res', res);
+          this.reloadProjectMembers(this._targetProjectID);
+        },
+        error: (err: any) => {
+          console.log(err);
+        },
+      });
+  }
+  removeMemberFromProject(projectMemberID: number) {
+    this._projectService.removeMemberFromProject(projectMemberID).subscribe({
+      next: (res: any) => {
+        console.log('res', res);
+        this.reloadProjectMembers(this._targetProjectID);
+      },
+      error: (err: any) => {
+        console.log(err);
+      },
+    });
   }
 }
