@@ -1,19 +1,18 @@
 <div class="bg-info text-center sidenav">
   <h3 class="text-center">
     <p>Welcome!</p>
+    <div class="text-center"></div>
     <div class="text-center">
-      <button *ngIf="loginStatus" class="btn btn-danger" (click)="logOut()">
-        Logout
-      </button>
-    </div>
-    <div class="text-center">
-      <button
-        *ngIf="loginStatus"
-        class="btn btn-success"
-        (click)="navigateToOwnProfile()"
-      >
-        Profile
-      </button>
+      <div class="my-3 position-relative pointer">
+        <i class="fa fa-user" aria-hidden="true"></i>
+        <a
+          *ngIf="loginStatus"
+          class="stretched-link text-decoration-none"
+          (click)="navigateToOwnProfile()"
+        >
+          Profile
+        </a>
+      </div>
     </div>
   </h3>
   <div class="text-center">
@@ -61,6 +60,14 @@
       class="btn sidebtn text-center"
     >
       Teams
+    </button>
+    <br />
+    <button
+      *ngIf="loginStatus"
+      class="btn sidebtn text-center red"
+      (click)="logOut()"
+    >
+      Logout
     </button>
   </div>
 </div>
