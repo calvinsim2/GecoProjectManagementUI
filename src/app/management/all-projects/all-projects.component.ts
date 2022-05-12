@@ -196,6 +196,7 @@ export class AllProjectsComponent implements OnInit {
     } else {
       this.addProject();
     }
+    this.reloadPost();
   }
 
   addMemberToProject() {
