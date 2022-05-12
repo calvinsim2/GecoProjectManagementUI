@@ -32,7 +32,7 @@ export class ManagementComponent implements OnInit {
   }
 
   navigateToMyProjects() {
-    this.router.navigate([`management/projects/${this.userId}`]);
+    this.router.navigate([`management/myprojects/${this.userId}`]);
   }
 
   navigateToUsers() {

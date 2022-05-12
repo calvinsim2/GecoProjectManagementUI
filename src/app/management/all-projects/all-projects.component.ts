@@ -4,6 +4,7 @@ import { ProjectDto } from 'src/app/shared/models/project.dto';
 import { ClientService } from 'src/app/shared/services/client.service';
 import { ProjectService } from 'src/app/shared/services/project.service';
 import { UserService } from 'src/app/shared/services/user.service';
+import { formatDate } from '@angular/common';
 
 type Client = {
   clientID: number;
@@ -87,10 +88,15 @@ export class AllProjectsComponent implements OnInit {
           projectID: project.projectID,
           projectName: project.projectName,
           projectDescription: project.projectDescription,
-          planStartDate: project.planStartDate,
-          planEndDate: project.planEndDate,
-          actualStartDate: project.actualStartDate,
-          actualEndDate: project.actualEndDate,
+          planStartDate: formatDate(project.planStartDate, 'yyyy-MM-dd', 'en'),
+
+          planEndDate: formatDate(project.planEndDate, 'yyyy-MM-dd', 'en'),
+          actualStartDate: formatDate(
+            project.actualStartDate,
+            'yyyy-MM-dd',
+            'en'
+          ),
+          actualEndDate: formatDate(project.actualEndDate, 'yyyy-MM-dd', 'en'),
           clientID: project.clientID,
           projectManagerID: project.projectManagerID,
         });

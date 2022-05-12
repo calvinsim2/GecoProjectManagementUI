@@ -1,1 +1,23 @@
-<p>my-projects works!</p>
+<!-- show list of project you belong too -->
+<div class="container">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Project ID</th>
+        <th scope="col">Project Name</th>
+        <th scope="col">Project Description</th>
+        <th scope="col">Start Date</th>
+        <th scope="col">End Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let myProject of _myProjects; index as i">
+        <td>{{ myProject.project.projectID }}</td>
+        <td>{{ myProject.project.projectName }}</td>
+        <td>{{ myProject.project.projectDescription }}</td>
+        <td>{{ parseDate(myProject.project.planStartDate) }}</td>
+        <td>{{ parseDate(myProject.project.planEndDate) }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
