@@ -250,18 +250,20 @@
             Add Member
           </button>
           <!-- List of Members to this project -->
-          <ng-container *ngFor="let member of _projectMembers">
-            <p>
+          <div class="row" *ngFor="let member of _projectMembers">
+            <p class="col">
               {{ member.user.username }}
             </p>
-            <button
-              type="button"
-              class="btn btn-primary"
-              (click)="removeMemberFromProject(member.projectMemberID)"
-            >
-              Remove
-            </button>
-          </ng-container>
+            <div class="col">
+              <button
+                type="button"
+                class="btn btn-primary"
+                (click)="removeMemberFromProject(member.projectMemberID)"
+              >
+                Remove
+              </button>
+            </div>
+          </div>
         </form>
       </div>
 
