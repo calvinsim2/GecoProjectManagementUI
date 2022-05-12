@@ -6,7 +6,7 @@
       class="btn btn-primary"
       data-bs-toggle="modal"
       data-bs-target="#productModal"
-      (click)="clearForm()"
+      (click)="clearProjectForm()"
     >
       Add Project
     </button>
@@ -53,6 +53,7 @@
             class="button"
             data-bs-toggle="modal"
             data-bs-target="#projectMemberModal"
+            (click)="setProjectIDAndReloadProjectMember(project.projectID)"
           >
             Add Member
           </button>
@@ -228,26 +229,47 @@
           aria-label="Close"
         ></button>
       </div>
-      <form [formGroup]="projectForm" (ngSubmit)="submit()">
-        <div class="modal-body"></div>
-        <div class="modal-footer">
+      <div class="modal-body">
+        <form [formGroup]="projectMemberForm">
+          <select
+            class="form-select"
+            formControlName="userID"
+            id="clientID"
+            name="clientID"
+            aria-label="clientID"
+          >
+            <option *ngFor="let user of _userNames" [ngValue]="user.userID">
+              {{ user.username }}
+            </option>
+          </select>
           <button
             type="button"
             class="btn btn-primary"
-            data-bs-dismiss="modal"
-            (click)="submit()"
+            (click)="addMemberToProject()"
           >
-            {{ isEdit ? "Update" : "Add" }}
+            Add Member
           </button>
-          <button
-            type="button"
-            class="btn btn-secondary"
-            data-bs-dismiss="modal"
-          >
-            Close
-          </button>
-        </div>
-      </form>
+          <!-- List of Members to this project -->
+          <ng-container *ngFor="let member of _projectMembers">
+            <p>
+              {{ member.user.username }}
+            </p>
+            <button
+              type="button"
+              class="btn btn-primary"
+              (click)="removeMemberFromProject(member.projectMemberID)"
+            >
+              Remove
+            </button>
+          </ng-container>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+      </div>
     </div>
   </div>
 </div>
