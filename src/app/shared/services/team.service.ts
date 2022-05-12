@@ -11,4 +11,8 @@ export class TeamService {
   getAllTeams() {
     return this._httpclient.get<any>(GlobalComponent.apiRootUrl + 'team');
   }
+
+  getIndividualTeam(id: any) {
+    return this._httpclient.get<any>(GlobalComponent.apiRootUrl + 'team/' + id);
+  }
 }
