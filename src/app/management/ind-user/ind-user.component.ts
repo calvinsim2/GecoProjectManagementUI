@@ -6,6 +6,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { UserService } from 'src/app/shared/services/user.service';
 import { RoleService } from 'src/app/shared/services/role.service';
+import { TeamComponent } from '../team/team.component';
+import { TeamService } from 'src/app/shared/services/team.service';
 
 @Component({
   selector: 'app-ind-user',
@@ -14,16 +16,22 @@ import { RoleService } from 'src/app/shared/services/role.service';
 })
 export class IndUserComponent implements OnInit {
   userId!: any;
+  teamId!: any;
   userData!: any;
   isActualUser: boolean = false;
+  isProjectManager: boolean = false;
+  isEditingTeams: boolean = false;
   public roleList: any = [];
+  public teamList: any = [];
   public userForm!: FormGroup;
+  public teamForm!: FormGroup;
 
   constructor(
     private router: Router,
     private authService: AuthService,
     private userService: UserService,
     private roleService: RoleService,
+    private teamService: TeamService,
     private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder
   ) {}
@@ -35,6 +43,7 @@ export class IndUserComponent implements OnInit {
 
     this.getUserDetails();
     this.getRoleDetails();
+    this.getTeamDetails();
 
     this.userForm = this.formBuilder.group({
       UserID: [this.userId],
@@ -44,14 +53,38 @@ export class IndUserComponent implements OnInit {
       LastName: ['', Validators.required],
       RoleID: [''],
     });
+    this.teamForm = this.formBuilder.group({
+      UserID: [this.userId],
+      TeamID: [0],
+    });
 
+    this.isProjectManager = this.authService.getProjectManagerStatus();
     this.isActualUser = this.authService.getLoggedInUserID() == this.userId;
   }
 
   getRoleDetails() {
     this.roleService.getAllRole().subscribe({
       next: (res) => {
-        this.roleList = res.result;
+        if (res.result.length < 1) {
+          this.teamList = [];
+        } else {
+          this.roleList = res.result;
+        }
+      },
+      error: (err) => {
+        alert(`${err.message}, there is a problem fetching roles.`);
+      },
+    });
+  }
+
+  getTeamDetails() {
+    this.teamService.getAllTeams().subscribe({
+      next: (res) => {
+        if (res.result.length < 1) {
+          this.teamList = [];
+        } else {
+          this.teamList = res.result;
+        }
       },
       error: (err) => {
         alert(`${err.message}, there is a problem fetching roles.`);
@@ -63,6 +96,8 @@ export class IndUserComponent implements OnInit {
     this.userService.getUserbyId(Number(this.userId)).subscribe({
       next: (res) => {
         this.userData = res.result;
+        console.log(this.userData);
+        this.teamId = this.userData.teamID;
       },
       error: (err) => {
         alert(err.message);
@@ -72,6 +107,7 @@ export class IndUserComponent implements OnInit {
   }
 
   onEditUser() {
+    this.isEditingTeams = false;
     this.userForm.controls['Username'].setValue(this.userData.username);
     this.userForm.controls['Email'].setValue(this.userData.email);
     this.userForm.controls['FirstName'].setValue(this.userData.firstName);
@@ -91,6 +127,28 @@ export class IndUserComponent implements OnInit {
         this.router.navigate(['login']);
       },
       error: (err) => {
+        alert(`${err.error.message}`);
+      },
+    });
+  }
+
+  onEditTeams() {
+    this.isEditingTeams = true;
+    this.teamForm.value.UserID = this.userId;
+
+    this.teamForm.controls['TeamID'].setValue(this.teamId);
+  }
+
+  editTeams() {
+    this.userService.updateUserTeam(this.teamForm.value).subscribe({
+      next: (res) => {
+        alert(`${res.message} - Teams updated.`);
+        this.getUserDetails();
+        this.teamForm.reset();
+        document.getElementById('close-emp')?.click();
+      },
+      error: (err) => {
+        console.log(err);
         alert(`${err.error.message}`);
       },
     });
