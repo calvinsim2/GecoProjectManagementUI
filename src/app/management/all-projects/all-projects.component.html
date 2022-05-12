@@ -6,7 +6,7 @@
       class="btn btn-primary"
       data-bs-toggle="modal"
       data-bs-target="#productModal"
-      (click)="isEdit = false"
+      (click)="clearForm()"
     >
       Add Project
     </button>
@@ -34,11 +34,27 @@
         </td>
         <td>{{ project.clientID }}</td>
         <td>
-          <button class="button">Edit</button>
+          <button
+            class="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#productModal"
+            (click)="loadProjectForm(project.projectID)"
+          >
+            Edit
+          </button>
         </td>
         <td>
           <button class="button" (click)="deleteProject(project.projectID)">
             Delete
+          </button>
+        </td>
+        <td>
+          <button
+            class="button"
+            data-bs-toggle="modal"
+            data-bs-target="#projectMemberModal"
+          >
+            Add Member
           </button>
         </td>
       </tr>
@@ -57,7 +73,9 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="productModalLabel">Add Project</h5>
+        <h5 class="modal-title" id="productModalLabel">
+          {{ isEdit ? "Edit Project" : "Add Project" }}
+        </h5>
         <button
           type="button"
           class="btn-close"
@@ -134,16 +152,17 @@
             <div class="col">
               <select
                 class="form-select"
+                formControlName="clientID"
                 id="clientID"
                 name="clientID"
                 aria-label="clientID"
               >
-                <option selected>Open this select menu</option>
-                <ng-container *ngFor="let client of _clientNames">
-                  <option [value]="client.clientID">
-                    {{ client.clientname }}
-                  </option>
-                </ng-container>
+                <option
+                  *ngFor="let client of _clientNames"
+                  [ngValue]="client.clientID"
+                >
+                  {{ client.clientName }}
+                </option>
               </select>
             </div>
           </div>
@@ -154,14 +173,14 @@
             <div class="col">
               <select
                 class="form-select"
+                formControlName="projectManagerID"
                 id="projectManagerID"
                 name="projectManagerID"
                 aria-label="projectManagerID"
               >
-                <option selected>Open this select menu</option>
-                <ng-container *ngFor="let user of _userNames">
-                  <option [value]="user.userID">{{ user.username }}</option>
-                </ng-container>
+                <option *ngFor="let user of _userNames" [ngValue]="user.userID">
+                  {{ user.username }}
+                </option>
               </select>
             </div>
           </div>
@@ -169,12 +188,64 @@
         <div class="modal-footer">
           <button
             type="button"
+            class="btn btn-primary"
+            data-bs-dismiss="modal"
+            (click)="submit()"
+          >
+            {{ isEdit ? "Update" : "Add" }}
+          </button>
+          <button
+            type="button"
             class="btn btn-secondary"
             data-bs-dismiss="modal"
           >
             Close
           </button>
-          <button type="button" class="btn btn-primary">Apply</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- ProjectMbember Model -->
+<div
+  class="modal fade"
+  id="projectMemberModal"
+  tabindex="-1"
+  aria-labelledby="projectMemberLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="projectMemberLabel">
+          {{ "Project Member" }}
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <form [formGroup]="projectForm" (ngSubmit)="submit()">
+        <div class="modal-body"></div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-dismiss="modal"
+            (click)="submit()"
+          >
+            {{ isEdit ? "Update" : "Add" }}
+          </button>
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
         </div>
       </form>
     </div>
