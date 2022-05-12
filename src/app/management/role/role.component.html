@@ -7,7 +7,8 @@
       <button
         class="btn addbtn btn-success"
         data-bs-toggle="modal"
-        data-bs-target="#blogModal"
+        data-bs-target="#roleModal"
+        (click)="onCreateRole()"
       >
         <i class="fa fa-plus"></i> Add Role
       </button>
@@ -32,7 +33,7 @@
           <button
             class="btn btn-danger"
             data-bs-toggle="modal"
-            data-bs-target="#deleteModal"
+            data-bs-target="#roleModal"
             (click)="onDeleteRole(role.roleID)"
           >
             X
@@ -47,7 +48,7 @@
 
 <div
   class="modal fade"
-  id="deleteModal"
+  id="roleModal"
   tabindex="-1"
   aria-labelledby="deleteLabel"
   aria-hidden="true"
@@ -57,7 +58,10 @@
   >
     <div class="modal-content decorate-modal">
       <div class="modal-header">
-        <h5 class="modal-title" id="commentModalLabel">
+        <h5 *ngIf="!isDeletingRole" class="modal-title" id="roleModalLabel">
+          Add New Role/Designation
+        </h5>
+        <h5 *ngIf="isDeletingRole" class="modal-title" id="roleModalLabel">
           Remove Role/Designation
         </h5>
         <button
@@ -68,12 +72,44 @@
           aria-label="Close"
         ></button>
       </div>
-      <div class="modal-body">
+      <div *ngIf="isDeletingRole" class="modal-body">
         <p class="fw-bold fst-italic">Remove Selected Role / Designation?</p>
       </div>
+      <!-- Edit user details form -->
+      <div *ngIf="!isDeletingRole" class="modal-body">
+        <form [formGroup]="roleForm">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label class="col-form-label"
+                  >RoleName <span class="text-danger">*</span></label
+                >
+                <input
+                  type="text"
+                  formControlName="RoleName"
+                  class="form-control"
+                />
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
       <div class="text-center my-2">
-        <button type="button" class="btn btn-danger" (click)="deleteRole()">
+        <button
+          *ngIf="isDeletingRole"
+          type="button"
+          class="btn btn-danger"
+          (click)="deleteRole()"
+        >
           Remove Role
+        </button>
+        <button
+          *ngIf="!isDeletingRole"
+          type="button"
+          class="btn btn-primary"
+          (click)="createRole()"
+        >
+          Add Role
         </button>
       </div>
     </div>

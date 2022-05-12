@@ -77,7 +77,6 @@ export class IndUserComponent implements OnInit {
     this.userForm.controls['FirstName'].setValue(this.userData.firstName);
     this.userForm.controls['LastName'].setValue(this.userData.lastName);
     this.userForm.controls['RoleID'].setValue(this.userData.roleID);
-    console.log(this.userForm.value);
   }
 
   updateUser() {

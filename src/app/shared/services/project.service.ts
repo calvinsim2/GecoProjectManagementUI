@@ -12,6 +12,12 @@ export class ProjectService {
     return this._httpclient.get(GlobalComponent.apiRootUrl + 'project');
   }
 
+  getProjectsByProjectManager(id: any) {
+    return this._httpclient.get<any>(
+      GlobalComponent.apiRootUrl + 'project/user/' + id
+    );
+  }
+
   addProject(project: FormData) {
     return this._httpclient.post(
       GlobalComponent.apiRootUrl + 'project/add',

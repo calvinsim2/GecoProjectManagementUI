@@ -1,3 +1,10 @@
+<div class="content container-fluid">
+  <div class="page-header d-flex justify-content-between">
+    <div class="page-title myheader">
+      <p>Employee List</p>
+    </div>
+  </div>
+</div>
 <div class="container text-center">
   <table class="table table-striped table-hover">
     <thead>
@@ -6,6 +13,8 @@
         <th scope="col">First Name</th>
         <th scope="col">Last Name</th>
         <th scope="col">Email</th>
+        <th scope="col">Role</th>
+        <th scope="col">Current Team</th>
         <th scope="col"></th>
         <th scope="col"></th>
       </tr>
@@ -16,6 +25,8 @@
         <td>{{ user.firstName }}</td>
         <td>{{ user.lastName }}</td>
         <td>{{ user.email }}</td>
+        <td>{{ user.role.roleName }}</td>
+        <td>{{ user.team.teamName }}</td>
         <td>
           <button class="btn btn-success" (click)="viewUser(user.userID)">
             <i class="fa fa-eye" aria-hidden="true"></i>
