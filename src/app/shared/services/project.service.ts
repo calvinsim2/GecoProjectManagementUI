@@ -21,6 +21,12 @@ export class ProjectService {
     );
   }
 
+  getProjectsByUserID(id: any) {
+    return this._httpclient.get<any>(
+      GlobalComponent.apiRootUrl + 'projectmember/user/' + id
+    );
+  }
+
   getProjectMembers() {
     return this._httpclient.get<any>(
       GlobalComponent.apiRootUrl + 'projectmember'
