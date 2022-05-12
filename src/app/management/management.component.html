@@ -1,5 +1,17 @@
 <div class="bg-info text-center sidenav">
-  <h3 class="text-center">Menu</h3>
+  <h3 class="text-center">
+    <p>Welcome!</p>
+    <div class="text-center">
+      <button *ngIf="loginStatus" class="btn btn-danger" (click)="logOut()">
+        Logout
+      </button>
+    </div>
+    <div class="text-center">
+      <button *ngIf="loginStatus" class="btn btn-success" (click)="logOut()">
+        Profile
+      </button>
+    </div>
+  </h3>
   <div class="text-center">
     <button (click)="navigateToDashBoard()" class="btn sidebtn text-center">
       DashBoard

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { UserService } from 'src/app/shared/services/user.service';
 import { ProjectService } from 'src/app/shared/services/project.service';
+import { TeamService } from 'src/app/shared/services/team.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,11 +14,14 @@ export class DashboardComponent implements OnInit {
   managerData!: any;
   projectsByManagerList!: any;
   isProjectByManagerEmpty!: boolean;
+  allTeamsList!: any;
+  isTeamsListEmpty!: boolean;
 
   constructor(
     private authService: AuthService,
     private userService: UserService,
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    private teamService: TeamService
   ) {}
 
   ngOnInit(): void {
@@ -26,6 +30,7 @@ export class DashboardComponent implements OnInit {
     // console.log(this.authService.getProjectManagerStatus());
     this.getManagerDetails();
     this.getProjectRelatedToManager();
+    this.getAllTeams();
   }
 
   getManagerDetails() {
@@ -74,5 +79,23 @@ export class DashboardComponent implements OnInit {
           alert('Error fetching projects');
         },
       });
+  }
+
+  getAllTeams() {
+    this.teamService.getAllTeams().subscribe({
+      next: (res) => {
+        this.allTeamsList = res.result;
+        if (res.result.length < 1) {
+          this.allTeamsList = [];
+          this.isTeamsListEmpty = true;
+        } else {
+          this.allTeamsList = res.result;
+          this.isTeamsListEmpty = false;
+        }
+      },
+      error: (err) => {
+        alert('Unable to obtain teams');
+      },
+    });
   }
 }

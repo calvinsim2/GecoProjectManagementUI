@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../shared/services/auth.service';
 
 @Component({
   selector: 'app-management',
@@ -7,11 +8,19 @@ import { Router } from '@angular/router';
   styleUrls: ['./management.component.scss'],
 })
 export class ManagementComponent implements OnInit {
-  userId: any = '1';
-  constructor(private router: Router) {}
+  userId!: any;
+  loginStatus!: boolean;
 
-  ngOnInit(): void {}
+  constructor(private router: Router, private authService: AuthService) {}
 
+  ngOnInit(): void {
+    this.userId = this.authService.getLoggedInUserID();
+    this.loginStatus = this.authService.isUserLogin() ? true : false;
+  }
+
+  logOut() {
+    this.router.navigate(['login']);
+  }
   // navigation
 
   navigateToDashBoard() {

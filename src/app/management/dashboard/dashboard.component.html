@@ -7,21 +7,20 @@
 </div>
 <div class="text-center">
   <div class="row bg-secondary">
-    <div class="col p-2 border border-1 rounded" style="background: white">
+    <div class="col p-2 border border-1 rounded" style="background: #c0c0c0">
       <div class="text-center">
-        <h4>{{ managerName }}</h4>
         <div>
-          <p class="fw-bold fst-italic">Your Teams</p>
+          <p class="fw-bold fst-italic">Welcome {{ managerName }}</p>
         </div>
       </div>
     </div>
-    <div class="col p-2 border border-1 rounded" style="background: white">
+    <div class="col p-2 border border-1 rounded" style="background: #c0c0c0">
       <div class="text-center">
-        <p class="fw-bold fst-italic">Projects</p>
+        <p class="fw-bold fst-italic">On-going Projects</p>
         <div *ngIf="!isProjectByManagerEmpty">
           <div *ngFor="let project of projectsByManagerList; let i = index">
             <div *ngIf="i < 2">
-              <div class="bg-info text-center">
+              <div class="eachcolumn text-center">
                 <h4>{{ project.projectName }}</h4>
                 <p>Client : {{ project.client.clientName }}</p>
                 <p>Deadline : {{ project.planEndDate }}</p>
@@ -30,13 +29,25 @@
           </div>
         </div>
         <div *ngIf="isProjectByManagerEmpty">
-          <div class="text-center text-info">No Projects Found</div>
+          <div class="text-center">No Projects Found</div>
         </div>
       </div>
     </div>
-    <div class="col p-2 border border-1 rounded" style="background: white">
+    <div class="col p-2 border border-1 rounded" style="background: #c0c0c0">
       <div class="text-center">
-        <p class="fw-bold fst-italic">Client</p>
+        <p class="fw-bold fst-italic">Your Teams</p>
+      </div>
+      <div *ngIf="isTeamsListEmpty">
+        <div class="text-center">No Teams Found</div>
+      </div>
+      <div *ngIf="!isTeamsListEmpty">
+        <div *ngFor="let team of allTeamsList; let i = index">
+          <div *ngIf="i < 2">
+            <div class="text-center">
+              <h4>{{ team.teamName }}</h4>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
