@@ -34,15 +34,23 @@
       </div>
     </div>
     <div class="col p-2 border border-1 rounded" style="background: #ffebcd">
-      <div class="text-center">
-        <p class="fw-bold fst-italic">Your Team</p>
-      </div>
-      <div *ngIf="isTeamsListEmpty">
-        <div class="text-center">No Teams Found</div>
+      <div class="row">
+        <div class="col">
+          <div class="text-center">
+            <p class="fw-bold fst-italic">
+              {{ "Your Team: " + this.teamName }}
+            </p>
+          </div>
+          <div class="col">
+            <div *ngIf="isTeamsListEmpty">
+              <div class="text-center">No Teams Found</div>
+            </div>
+          </div>
+        </div>
       </div>
       <div *ngIf="!isTeamsListEmpty" class="border border-rounded bg-info">
-        <p class="fw-bold fst-italic">{{ this.teamName }}</p>
-        <p class="fw-bold fst-italic">Members :</p>
+        <p class="fw-bold fst-italic"></p>
+        <p class="fw-bold fst-italic"><u>Members</u></p>
         <div *ngFor="let member of teamsList; let i = index">
           <div class="text-center">
             <p>{{ member.firstName }} {{ member.lastName }}</p>
