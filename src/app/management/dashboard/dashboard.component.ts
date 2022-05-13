@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { UserService } from 'src/app/shared/services/user.service';
 import { ProjectService } from 'src/app/shared/services/project.service';
 import { TeamService } from 'src/app/shared/services/team.service';
+import * as confetti from 'canvas-confetti';
+
+declare var require: any;
 
 @Component({
   selector: 'app-dashboard',
@@ -23,7 +26,9 @@ export class DashboardComponent implements OnInit {
     private authService: AuthService,
     private userService: UserService,
     private projectService: ProjectService,
-    private teamService: TeamService
+    private teamService: TeamService,
+    private renderer2: Renderer2,
+    private elementRef: ElementRef
   ) {}
 
   ngOnInit(): void {
@@ -100,6 +105,41 @@ export class DashboardComponent implements OnInit {
       error: (err) => {
         alert('Unable to obtain teams');
       },
+    });
+  }
+  randomInRange(min: number, max: number) {
+    return Math.random() * (max - min) + min;
+  }
+
+  public surprise(): void {
+    const canvas = this.renderer2.createElement('canvas');
+    canvas.zindex = 100;
+
+    this.renderer2.appendChild(this.elementRef.nativeElement, canvas);
+
+    const end = Date.now() + 2 * 1000; // set the end time
+
+    const myConfetti = confetti.create(canvas, {
+      resize: true, // will fit all screen sizes
+    });
+
+    const interval = setInterval(() => {
+      if (Date.now() > end) {
+        // if time reached then clear the interval
+        clearInterval(interval);
+
+        return this.renderer2.removeChild(
+          this.elementRef.nativeElement,
+          canvas
+        ); // remove the canvas from the DOM
+      }
+    });
+
+    myConfetti({
+      angle: this.randomInRange(55, 125),
+      spread: this.randomInRange(50, 70),
+      particleCount: this.randomInRange(50, 100),
+      origin: { y: 0.6 },
     });
   }
 }
