@@ -117,7 +117,7 @@ export class DashboardComponent implements OnInit {
 
     this.renderer2.appendChild(this.elementRef.nativeElement, canvas);
 
-    const end = Date.now() + 2 * 1000; // set the end time
+    const end = Date.now() + 0.5 * 1000; // set the end time
 
     const myConfetti = confetti.create(canvas, {
       resize: true, // will fit all screen sizes
