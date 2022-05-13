@@ -56,9 +56,11 @@
   >
     Edit Details
   </button>
+</div>
+<div class="container-fluid text-center mt-2">
   <button
     *ngIf="isProjectManager"
-    class="btn btn-success"
+    class="btn btn-primary"
     data-bs-toggle="modal"
     data-bs-target="#userModal"
     (click)="onEditTeams()"
@@ -193,7 +195,7 @@
         <button
           *ngIf="isProjectManager && isEditingTeams"
           type="button"
-          class="btn btn-success"
+          class="btn btn-primary"
           (click)="editTeams()"
         >
           Assign Team
