@@ -1,3 +1,8 @@
+type Client = {
+  clientID: number;
+  clientName: string;
+};
+
 export class ProjectDto {
   projectID!: number;
   projectName!: string;
@@ -8,4 +13,5 @@ export class ProjectDto {
   projectDescription!: string;
   clientID!: number;
   ProjectManagerID!: number;
+  client!: Client;
 }
